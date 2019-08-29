@@ -1,0 +1,26 @@
+{
+  "name": "feedbackanurag",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Developerani/feedbackSystem.git"
+  },
+  "author": "Anurag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Developerani/feedbackSystem/issues"
+  },
+  "homepage": "https://github.com/Developerani/feedbackSystem#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "firebase-admin": "^8.4.0",
+    "nodemon": "^1.19.1"
+  }
+}
