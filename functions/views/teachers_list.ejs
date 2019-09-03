@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <title>Teacher List</title>  
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.8/css/mdb.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+<main>
+ 
+  
+  
+<div class="row mt-4"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 mt-5"></div>
+                <div class="col-md-8 mt-5">
+
+                     <div class="card">
+                          <table class="table">
+  <thead>
+    <tr>
+     
+      <th scope="col" class="text-center">Name</th>
+      <th scope="col"  class="text-center">Subject</th>
+      <th scope="col" class="text-center">Feedback</th>
+    </tr>
+  </thead>
+  <tbody>
+      <%for(key in data){%>
+    <tr>
+    
+      <td class="text-center"><%=data[key]%></td>
+      <td class="text-center"><%=key%></td>
+      <td class="text-center"><button type="button" id="<%=key%>" value="Subject : <%=key%> | Teacher : <%=data[key]%>" class="btn btn-primary btn-outline-primary btn-sm"  data-toggle="modal" data-target="#centralModalSm" onclick="subject(this.id)">Feedback</button></td>
+    </tr>
+    <%}%>
+  </tbody>
+</table>
+                    </div>
+                </div>
+                <div class="col-md-2 mt-5"></div>
+            </div>
+        </div>
+
+        <!-- model -->
+
+      <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" data-backdrop="false" >
+    
+        <!-- Change class .modal-sm to change the size of the modal -->
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title w-100" id="myModalLabel"></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            
+   
+             <form action="/feed_feedback" method="post">
+       <p class="h4" >1)  Subject Knowledge </p>
+        <!-- hidden Data -->
+    <input type="text" name="clg_id" id="clg_id" value="<%=clg_id%>" style="display: none">
+    <input type="text" name="dept" id="dept" value="<%=dept%>" style="display: none">
+    <input type="text" name="year" id="year" value="<%=year%>" style="display: none">
+    <input type="text" name="div" id="div" value="<%=div%>" style="display: none">
+    <input type="text" name="sub_id" id="sub_id" value="" style="display: none">
+    <!-- hidden data -->
+    
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample11" value="1" name="q1">
+        <label class="custom-control-label" for="defaultGroupExample11">Not Satisfactory</label>
+      </div>
+    
+      <!-- Group of default radios - option 2 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample12" value="2" name="q1">
+        <label class="custom-control-label" for="defaultGroupExample12">Satisfactory</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample13" value="3" name="q1">
+        <label class="custom-control-label" for="defaultGroupExample13">good</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample14" value="4" name="q1">
+        <label class="custom-control-label" for="defaultGroupExample14">Very good</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample15" value="5" name="q1">
+        <label class="custom-control-label" for="defaultGroupExample15">Excellent</label>
+      </div>
+    
+      <hr>
+    
+       <p class="h4"  >2)  Content Delivery & Presentation</p>
+    
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample21" value="1" name="q2">
+        <label class="custom-control-label" for="defaultGroupExample21">Not Satisfactory</label>
+      </div>
+    
+      <!-- Group of default radios - option 2 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample22" value="2" name="q2">
+        <label class="custom-control-label" for="defaultGroupExample22">Satisfactory</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample23" value="3" name="q2">
+        <label class="custom-control-label" for="defaultGroupExample23">good</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample24" value="4" name="q2">
+        <label class="custom-control-label" for="defaultGroupExample24">Very good</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample25" value="5" name="q2">
+        <label class="custom-control-label" for="defaultGroupExample25">Excellent</label>
+      </div>
+    
+      <hr>
+    
+      <p class="h4" >3)  Clarification of doubt inside and outside of class</p>
+    
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample31" value="1" name="q3">
+        <label class="custom-control-label" for="defaultGroupExample31">Not Satisfactory</label>
+      </div>
+    
+      <!-- Group of default radios - option 2 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample32" value="2" name="q3">
+        <label class="custom-control-label" for="defaultGroupExample32">Satisfactory</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample33" value="3" name="q3">
+        <label class="custom-control-label" for="defaultGroupExample33">good</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample34" value="4" name="q3">
+        <label class="custom-control-label" for="defaultGroupExample34">Very good</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample35" value="5" name="q3">
+        <label class="custom-control-label" for="defaultGroupExample35">Excellent</label>
+      </div>
+    
+      <hr>
+    
+      <p class="h4" >4) Practical Knowledge & Demonstration</p>
+    
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample41" value="1" name="q4">
+        <label class="custom-control-label" for="defaultGroupExample41">Not Satisfactory</label>
+      </div>
+    
+      <!-- Group of default radios - option 2 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample42" value="2" name="q4">
+        <label class="custom-control-label" for="defaultGroupExample42">Satisfactory</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample43" value="3" name="q4">
+        <label class="custom-control-label" for="defaultGroupExample43">good</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample44" value="4" name="q4">
+        <label class="custom-control-label" for="defaultGroupExample44">Very good</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample45" value="5" name="q4">
+        <label class="custom-control-label" for="defaultGroupExample45">Excellent</label>
+      </div>
+    
+      <hr>
+    
+      <p class="h4"  >5) Punctuality & Class Control</p>
+    
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample51" value="1" name="q5">
+        <label class="custom-control-label" for="defaultGroupExample51">Not Satisfactory</label>
+      </div>
+    
+      <!-- Group of default radios - option 2 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample52" value="2" name="q5">
+        <label class="custom-control-label" for="defaultGroupExample52">Satisfactory</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample53" value="3" name="q5">
+        <label class="custom-control-label" for="defaultGroupExample53">good</label>
+      </div>
+    
+      <!-- Group of default radios - option 3 -->
+      <div class="custom-control custom-radio">
+        <input type="radio" class="custom-control-input" id="defaultGroupExample54" value="4" name="q5">
+        <label class="custom-control-label" for="defaultGroupExample54">Very good</label>
+      </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample55" value="5" name="q5">
+      <label class="custom-control-label" for="defaultGroupExample55">Excellent</label>
+    </div>
+    
+    <hr>
+    
+    <p class="h4"  >6) Modern teaching aids, power point presentations, web-resources, etc. are used by the teachers while teaching</p>
+    
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample61" value="1" name="q6">
+      <label class="custom-control-label" for="defaultGroupExample61">Not Satisfactory</label>
+    </div>
+    
+    <!-- Group of default radios - option 2 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample62" value="2" name="q6">
+      <label class="custom-control-label" for="defaultGroupExample62">Satisfactory</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample63" value="3" name="q6">
+      <label class="custom-control-label" for="defaultGroupExample63">good</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample64" value="4" name="q6">
+      <label class="custom-control-label" for="defaultGroupExample64">Very good</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample65" value="5" name="q6">
+      <label class="custom-control-label" for="defaultGroupExample65">Excellent</label>
+    </div>
+    
+    <hr>
+    
+    <p class="h4"  >7) Fair treatment given to all students</p>
+    
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample71" value="1" name="q7">
+      <label class="custom-control-label" for="defaultGroupExample71">Not Satisfactory</label>
+    </div>
+    
+    <!-- Group of default radios - option 2 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample72" value="2" name="q7">
+      <label class="custom-control-label" for="defaultGroupExample72">Satisfactory</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample73" value="3" name="q7">
+      <label class="custom-control-label" for="defaultGroupExample73">good</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample74" value="4" name="q7">
+      <label class="custom-control-label" for="defaultGroupExample74">Very good</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample75" value="5" name="q7">
+      <label class="custom-control-label" for="defaultGroupExample75">Excellent</label>
+    </div>
+    
+    <hr>
+    
+    <p class="h4" >8) Usage of english in teaching</p>
+    
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample81" value="1" name="q8">
+      <label class="custom-control-label" for="defaultGroupExample81">Not Satisfactory</label>
+    </div>
+    
+    <!-- Group of default radios - option 2 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample82" value="2" name="q8">
+      <label class="custom-control-label" for="defaultGroupExample82">Satisfactory</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample83" value="3" name="q8">
+      <label class="custom-control-label" for="defaultGroupExample83">good</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample84" value="4" name="q8">
+      <label class="custom-control-label" for="defaultGroupExample84">Very good</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample85" value="5" name="q8">
+      <label class="custom-control-label" for="defaultGroupExample85">Excellent</label>
+    </div>
+    
+    <hr>
+    
+    <p class="h4"  >9)Overall</p>
+    
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample91" value="1" name="q9">
+      <label class="custom-control-label" for="defaultGroupExample91">Not Satisfactory</label>
+    </div>
+    
+    <!-- Group of default radios - option 2 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample92" value="2" name="q9">
+      <label class="custom-control-label" for="defaultGroupExample92">Satisfactory</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample93" value="3" name="q9">
+      <label class="custom-control-label" for="defaultGroupExample93">good</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample94" value="4" name="q9">
+      <label class="custom-control-label" for="defaultGroupExample94">Very good</label>
+    </div>
+    
+    <!-- Group of default radios - option 3 -->
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultGroupExample95" value="5" name="q9">
+      <label class="custom-control-label" for="defaultGroupExample95">Excellent</label>
+    </div>
+    
+    
+    <hr>
+    
+     <button type="submit" class="btn btn-primary btn-sm">Submit Feedback</button>
+    </form>
+    
+    
+    
+    
+          </div>
+         <!--  <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+           
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+        <!-- model -->
+    </main>
+  
+
+   <!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.8/js/mdb.min.js"></script>
+
+    <script>
+    var data= '<%- JSON.stringify(data)%>';
+    data = JSON.parse(data);
+    // console.log(Object.key(data))
+    
+    for(var key in data)
+    {
+     console.log(key,data[key])
+    }
+    function subject(id)
+    {
+      document.getElementById("sub_id").value = id;
+       
+      document.getElementById("myModalLabel").innerHTML = document.getElementById(id).value;
+    }
+    </script> 
+  </body>
+</html>
