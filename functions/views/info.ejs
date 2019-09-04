@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <script>
+                function parseURLParams(url) {
+                    var queryStart = url.indexOf("?") + 1,
+                        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
+                        query = url.slice(queryStart, queryEnd - 1),
+                        pairs = query.replace(/\+/g, " ").split("&"),
+                        parms = {}, i, n, v, nv;
+                
+                    if (query === url || query === "") return;
+                
+                    for (i = 0; i < pairs.length; i++) {
+                        nv = pairs[i].split("=", 2);
+                        n = decodeURIComponent(nv[0]);
+                        v = decodeURIComponent(nv[1]);
+                
+                        if (!parms.hasOwnProperty(n)) parms[n] = [];
+                        parms[n].push(nv.length === 2 ? v : null);
+                    }
+                    return parms;
+                }    
+                </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Information</title>
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md"></div>
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-body">
+                        Hello User
+                        <form action="/details" method="post">
+                            <input type="hidden" name="dept" id="dept" value="">
+                            <input type="hidden" name="year" id="year" value="">
+                            <input type="hidden" name="div" id="div" value="">
+                            <input type="hidden" name="clg_id" id="clg_id" value="">
+                            <button class="btn" type="submit">Submit</button>
+                        </form>
+                        <script>
+                            var urlString = location.href;
+                            urlParams = parseURLParams(urlString);
+                    
+                        document.getElementById("dept").value=urlParams.dept[0];
+                        document.getElementById("year").value=urlParams.year[0];
+                        document.getElementById("div").value=urlParams.div[0];
+                        document.getElementById("clg_id").value=urlParams.clg_id[0];
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md"></div>
+        </div>
+    </div>
+    <!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/js/mdb.min.js"></script>
+
+</body>
+</html>

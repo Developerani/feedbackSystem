@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>OTP</title>
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-firestore.js"></script>
+<script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+    apiKey: "AIzaSyAP9uflUJGYatBwHwkkvNhlgDaGf5QQ8wM",
+    authDomain: "feedback-142e5.firebaseapp.com",
+    databaseURL: "https://feedback-142e5.firebaseio.com",
+    projectId: "feedback-142e5",
+    storageBucket: "",
+    messagingSenderId: "421471739309",
+    appId: "1:421471739309:web:a1287ceb0be34ade"
+  };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+</script>
+
+</head>
+<body>
+    <div class="text-center container mt-5">
+        <div class="row">
+            <div class="col-md"></div>
+            <div class="col-md">
+                    <div class="card">
+                        <div class="card-header">
+                            OTP Verification
+                        </div>
+                            <div class="card-body">
+                                <h5 class="h5-responsive text-info">Your OTP is send to your registered Mobile No</h5>
+                                <form>
+                                <input type="hidden" name="dept" value="<%= dept %>">
+                                <input type="hidden" name="year" value="<%= year %>">
+                                <input type="hidden" name="div" value="<%= div %>">
+                                <input type="hidden" name="clg_id" value="<%= clg_id %>">
+                                <div class="md-form md-outline">
+                                    <input type="text" id="otp" class="form-control">
+                                    <label for="otp">Enter OTP</label>
+                                    <p class="text-danger" style="display: none">Wrong OTP</p>
+                                </div> 
+                            </div>
+                            <div class="card-footer">
+                                    <button class="btn btn-sm" onclick="myFunction()">Submit</button>
+                                </form>
+                            </div>
+                            <div id="sign-in-button"></div>
+                        </div>  
+            </div>
+            <div class="col-md"></div>
+        </div>
+    </div>
+       <!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/js/mdb.min.js"></script>
+    <script>
+        
+            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
+              'size': 'invisible',
+              'callback': function(response) {
+                // reCAPTCHA solved, allow signInWithPhoneNumber.
+                onSignInSubmit();
+              }
+            });
+        
+        var phoneNumber = "<%= no %>";
+        var appVerifier = window.recaptchaVerifier;
+        firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+            .then(function (confirmationResult) {
+              console.log("ok otp send to "+phoneNumber);
+              window.confirmationResult  = confirmationResult;
+            }).catch(function (error) {
+              console.log("err => "+ error);
+              alert(error);
+            });
+        
+            var myFunction = function() { 
+            window.confirmationResult.confirm(document.getElementById("otp").value) 
+            .then(function(result) {
+                var dept = "<%= dept %>";
+                var year = "<%= year %>";
+                var div = "<%= div %>";
+                var clg_id = "<%= clg_id %>"; 
+                var name  = "<%= name %>";
+                location.href = "/details/"+dept+"&"+year+"&"+div+"&"+clg_id+"&"+name;
+            }, function(error) { 
+            alert(error); 
+            }); 
+            };
+            </script>
+</body>
+</html>

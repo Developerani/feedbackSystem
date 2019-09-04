@@ -30,6 +30,10 @@ app.get("/",(req,res)=>{
     res.render("home");
 });
 
+app.get("/thankyou",(req,res)=>{
+    res.render("thankyou")
+})
+
 app.get("/teachers_list/:dept&:year&:div&:id",(req,res)=>{
     console.log(req.params.info);
     
@@ -89,14 +93,53 @@ app.get("/teachers_list/:dept&:year&:div&:id",(req,res)=>{
 
    
 })
-
-app.post("/details",(req,res)=>{
-    
+app.post("/data",(req,res)=>{
     var dept = req.body.dept;
     var year = req.body.year;
     var div = req.body.div;
     var clg_id = req.body.clg_id;
     var name = req.body.name;
+    res.redirect("/otp/"+dept+"&"+year+"&"+div+"&"+clg_id+"&"+name);
+});
+
+app.get("/otp/:dept&:year&:div&:id&:name",(req,res)=>{
+    var dept = req.params.dept;
+    var year = req.params.year;
+    var div = req.params.div;
+    var clg_id = req.params.id;
+    var name = req.params.name;
+    let p = new Promise((resolve,reject)=>{
+        db.ref("/phone/"+clg_id).once("value", function (snapshot) {
+            var a = snapshot.val();
+            if(a){
+            resolve(a);
+            }else{
+            reject("Unsuccessful")
+            }
+        }, function (errorObject) {
+            reject(errorObject)
+        });
+    });
+    p.then((result)=>{
+        var no = result.number;
+        console.log(result.number);
+        res.render("otp",{dept:dept,year:year,div:div,clg_id:clg_id,no:no,name:name})
+    }).catch((err)=>{
+        console.log(err);
+    });
+});
+
+app.get("/info/:",(req,res)=>{
+    res.render("info")
+})
+
+app.get("/details/:dept&:year&:div&:id&:name",(req,res)=>{
+    
+    var dept = req.params.dept;
+    var year = req.params.year;
+    var div = req.params.div;
+    var clg_id = req.params.id;
+    var name = req.params.name;
 
     let p = new Promise((resolve,reject)=>{
         db.ref("/teachers/"+dept+"/"+year+"/"+div).once("value", function (snapshot) {
@@ -115,7 +158,7 @@ app.post("/details",(req,res)=>{
             reject("Unsuccessful")
             }
         }, function (errorObject) {
-            reject(""+errorObject+"")
+            reject(errorObject)
         });
     })
     p.then((data)=>{
@@ -127,27 +170,47 @@ app.post("/details",(req,res)=>{
             teach[key] = 0;
         } 
         console.log("teach",teach);
-        //----------------------------inserting student data----------------------
+        db.ref("/students/"+dept+"/"+year+"/"+div+"/"+clg_id).once('value',function(shapsht){
+            var student = shapsht.val();
+
+            if(student)
+            {
+                console.log("Ridireting to"+'data'+clg_id);
+                    
+                res.redirect("/teachers_list/"+dept+"&"+year+"&"+div+"&"+clg_id);
+
+            }
+            else{
+                console.log("student data not present ")
+                //----------------------------inserting student data----------------------
        db.ref("/students/"+dept+"/"+year+"/"+div+"/"+clg_id).set({name:name,Teachers:teach},function (errorObject) {
-           if(errorObject)
-                {
-                    console.log("Error inserting in student data ",errorObject);
-                    res.render("err");
-                }
-            else
-                {
-                    
-                   
-                   
-                    console.log("Ridireting to"+'data'+clg_id);
-                    
-                    res.redirect("/teachers_list/"+dept+"&"+year+"&"+div+"&"+clg_id);
-                }
-            
-    });
-        //----------------------------inserted student data-----------------------
-        // res.render("feedback",{data:teachers})
-        console.log("passing to then");
+        if(errorObject)
+             {
+                 console.log("Error inserting in student data ",errorObject);
+                 res.render("err");
+             }
+         else
+             {
+                 
+                
+                
+                 console.log("Ridireting to"+'data'+clg_id);
+                 
+                 res.redirect("/teachers_list/"+dept+"&"+year+"&"+div+"&"+clg_id);
+             }
+         
+ });
+     //----------------------------inserted student data-----------------------
+     // res.render("feedback",{data:teachers})
+     console.log("passing to then");
+            }
+        },(err)=>{
+            if(err)
+            {
+                console.log("err in student data retrieval in details ",err);
+            }
+        })
+        
     }).catch((msg)=>{
         console.log(msg);
         res.render("err");
