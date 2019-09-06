@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Feedback OTP</title>
+    <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
+
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+<script>
+// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyAP9uflUJGYatBwHwkkvNhlgDaGf5QQ8wM",
+    authDomain: "feedback-142e5.firebaseapp.com",
+    databaseURL: "https://feedback-142e5.firebaseio.com",
+    projectId: "feedback-142e5",
+    storageBucket: "",
+    messagingSenderId: "421471739309",
+    appId: "1:421471739309:web:a1287ceb0be34ade"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+</head>
+<body>
+    <div id="firebaseui-auth-container"></div>
+   <script>
+       var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start('#firebaseui-auth-container', {
+    signInSuccessUrl: '/home',
+    signInOptions: [{
+       provider:firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+       defaultCountry: 'IN',
+    }],
+    });
+    </script>
+</body>
+</html>

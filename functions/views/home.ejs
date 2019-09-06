@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+   <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.8/css/mdb.min.css" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mt-5"></div>
+                <div class="col-md-4 mt-5">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            Enter Details
+                        </div>
+                        <div class="card-body">
+                          <form action="/details" method="post">
+                              <div class="form-group">
+                                <input name="name" type="text" placeholder="Name" class="form-control" required>
+                              </div>
+                              <div class="form-group">
+                                <input name="clg_id" type="text" placeholder="College ID" class="form-control" required>
+                              </div>
+                              <div class="form-group">
+                                    <select name="dept" class="form-control" id = "dept" onchange="select_dept()" required>
+                                      <option disabled selected>Select Department</option>
+                                      <option value = "comp">Computer</option>
+                                      <option value = "mech">Mechnical</option>
+                                      <option value = "e&tc">E&TC</option>
+                                      <option value = "civil">Civil</option>
+                                      <option value = "msw">Mechnical-Sandwich</option>
+                                      <option value = "fe">FE</option>
+                                      <option value = "mca">MCA</option>
+                                    </select>
+                             </div>
+                             <div class="form-group">
+                                    <select name="year" id="year" class="form-control" style="display: none" onchange = "select_year()" required>
+                                    </select>
+                             </div>
+                             <div class="form-group">
+                                    <select name="div" id="div" class="form-control" style="display: none" required>
+                                    </select>
+                             </div>
+
+                        </div>
+                        <div class="card-footer">
+                                <div class="text-center">
+                                        <button type="submit" class="btn btn-md btn-outline-success">Proceed</button>
+                                </div>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-5"></div>
+            </div>
+        </div>
+    </main>
+    <!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.8/js/mdb.min.js"></script>
+    
+    <script>
+
+            function select_dept()
+            {
+                var dept=document.getElementById("dept").value;
+                var y=document.getElementById("year");
+                document.getElementById("year").style.display="block";
+                y.innerHTML = "";
+                document.getElementById("div").innerHTML = "";
+              if(dept=="fe")
+              {
+               
+                y.innerHTML = ` <option disabled selected>Select Year</option>
+                                  <option value="fe" onchange = "select_year()">FE</option>`;
+              }
+              else if(dept=="mech" || dept == "comp" || dept == "civil")
+              {
+                
+                y.innerHTML = ` <option disabled selected>Select Year</option>
+                                  <option value="se">SE</option>
+                                  <option value="te">TE</option>
+                                  <option value="be">BE</option>`;
+              }
+
+              else if(dept=="mca")
+              {
+                
+                y.innerHTML = ` <option disabled selected>Select Year</option>
+                                  <option value="fy">FY</option>
+                                  <option value="sy">SY</option>
+                                  <option value="ty">TY</option>`;
+              }
+
+              else if(dept=="msw")
+              {
+                
+                y.innerHTML = ` <option disabled selected>Select Year</option>
+                                  <option value="se">SE</option>
+                                  <option value="te">TE</option>`;
+              }
+
+              else
+              {
+                
+                y.innerHTML = ` <option disabled selected>Select Year</option>
+                                  <option value="be">BE</option>`;
+              }
+           
+        }
+
+        function select_year()
+        {
+          
+              var dept = document.getElementById("dept").value;
+              var year = document.getElementById("year").value;
+              var d = document.getElementById("div");
+              document.getElementById("div").style.display="block";
+              d.innerHTML = "";
+              console.log("selecting year",dept,year)
+              
+                  if(year == "fe")
+                  {
+                    console.log("year is fe")
+                    d.innerHTML = ` <option disabled selected>Select Division</option>
+                                  <option value="div1">Div-1</option>
+                                  <option value="div2">Div-2</option>
+                                  <option value="div3">Div-3</option>
+                                  <option value="div4">Div-4</option>`;
+                  }
+                  else if(dept == "comp" || dept == "mech")
+                  {
+                    console.log("dept is comp or mech")
+                    d.innerHTML = ` <option disabled selected>Select Division</option>
+                                  <option value="div1">Div-1</option>
+                                  <option value="div2">Div-2</option>`;
+                  }
+
+                 
+                  else if(dept == "civil" || dept == "mca" || dept == "msw" || dept == "e&tc")
+                  {
+                    console.log("dept is others")
+                    d.innerHTML = ` <option disabled selected>Select Division</option>
+                                  <option value="div1">Div-1</option>`;
+                  }
+
+                  else
+                  {
+                    console.log("else")
+                    d.innerHTML = "";
+                  }
+              
+
+        }
+    
+    </script>        
+</body>
+</html>
